@@ -30,3 +30,7 @@ void Course::DisplayAssignments() {
         cout << i + 1 << assignments[i];
     }
 }
+
+void Course::RemoveAssignment(string toDelete) {
+//    for
+}

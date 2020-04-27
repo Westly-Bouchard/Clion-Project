@@ -14,6 +14,11 @@ string helpMessages[5] = {
         "Select a specific course to add or remove assignmnets",
         "Displays the help menu."
 };
+string courseCommands[3] = {"add", "remove", "display"};
+string courseCommandsHelp[3] = {
+        "Add an assignment to your selected course.",
+        "Remove an assignment from your selected course.",
+        "Display all assignments in a course."};
 vector<Course> courses;
 
 //General function for making strings all lower case.
@@ -38,7 +43,7 @@ void DisplayHelp() {
     for (int i = 0; i < sizeof(commands) / sizeof(string); i++) {
         cout << commands[i] << ": " << helpMessages[i] << endl;
     }
-    cout << endl << endl;
+    cout << endl;
 }
 
 void AddCourse() {
@@ -51,10 +56,15 @@ void AddCourse() {
 }
 
 void PrintCourses() {
-    for (int i = 0; i < courses.size(); i++) {
-        cout << courses[i].GetName() << endl;
+    if (!courses.empty()) {
+        for (int i = 0; i < courses.size(); i++) {
+            cout << courses[i].GetName() << endl;
+        }
+    } else {
+        cout << "You dont have any courses yet silly! Add courses using the 'add' command." << endl;
     }
 }
+
 
 void RemoveCourse() {
     string course;
@@ -64,9 +74,32 @@ void RemoveCourse() {
     for (int i = 0; i < courses.size(); i++) {
         if (toLowerCase(courses[i].GetName()) == toLowerCase(course)) {
             courses.erase(courses.begin() + i);
-            break;
+            return;
         }
     }
+    cout << "That it not a valid command." << endl;
+}
+
+
+bool checkSelectedCourse(string selectedCourse) {
+    for (int i = 0; i < courses.size(); i++) {
+        if (toLowerCase(courses[i].GetName()) == toLowerCase(selectedCourse)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+void SelectCourse() {
+    string selectedCourse;
+    cout << "Which course would you like to select?";
+    while (!checkSelectedCourse(selectedCourse)) {
+        cin >> selectedCourse;
+    }
+    cout << "The selected course is: " + selectedCourse << endl;
+
+
 }
 
 void DoCommand(int command) {
@@ -80,10 +113,17 @@ void DoCommand(int command) {
         case 2:
             PrintCourses();
             break;
+        case 3:
+            if (!courses.empty()) {
+                SelectCourse();
+            } else {
+                cout << "You don't have any courses yet.";
+            }
         default:
             return;
     }
 }
+
 
 void ParseInput(const string input) {
     for (int i = 0; i < sizeof(commands) / sizeof(string); i++) {
@@ -92,6 +132,7 @@ void ParseInput(const string input) {
             return;
         }
     }
+    cout << "That is not a valid command" << endl;
 }
 
 

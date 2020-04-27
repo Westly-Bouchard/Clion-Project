@@ -21,6 +21,7 @@ public:
     string GetName();
     string GetAssignment(int index);
     void AddAssignment(string nameOf);
+    void RemoveAssignment(string toDelete);
     void DisplayAssignments();
 
 };
