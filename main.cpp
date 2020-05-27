@@ -14,11 +14,7 @@ string helpMessages[5] = {
         "Select a specific course to add or remove assignmnets",
         "Displays the help menu."
 };
-string courseCommands[3] = {"add", "remove", "display"};
-string courseCommandsHelp[3] = {
-        "Add an assignment to your selected course.",
-        "Remove an assignment from your selected course.",
-        "Display all assignments in a course."};
+
 vector<Course> courses;
 
 //General function for making strings all lower case.
@@ -91,6 +87,7 @@ bool checkSelectedCourse(string selectedCourse) {
 }
 
 
+
 void SelectCourse() {
     string selectedCourse;
     cout << "Which course would you like to select?";
@@ -101,6 +98,7 @@ void SelectCourse() {
 
 
 }
+
 
 void DoCommand(int command) {
     switch(command) {
